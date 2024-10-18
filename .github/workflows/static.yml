@@ -1,10 +1,10 @@
-# 部署 player3.html 文件到 GitHub Pages 的工作流
-name: 部署 player3.html 到 Pages
+# 简单的工作流，用于将特定的 HTML 文件部署到 GitHub Pages
+name: 部署 HTML 文件到 Pages
 
 on:
-  # 仅当推送到 master 分支时触发工作流
+  # 仅当推送到默认分支（main）时触发工作流
   push:
-    branches: ["master"]
+    branches: ["main"]
 
   # 允许从 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
@@ -37,12 +37,12 @@ jobs:
       - name: 设置 Pages
         uses: actions/configure-pages@v5
       
-      # 第三步：上传工件（player3.html 文件）
+      # 第三步：上传工件（HTML 文件）
       - name: 上传工件
         uses: actions/upload-pages-artifact@v3
         with:
           # 指定要上传的 HTML 文件路径
-          path: './player3.html'  # 指定根目录下的 player3.html 文件
+          path: './player3.html'  # 修改为你的 HTML 文件相对路径，例如 './index.html'
       
       # 第四步：部署到 GitHub Pages
       - name: 部署到 GitHub Pages
