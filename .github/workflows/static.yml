@@ -1,43 +1,50 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# 部署 player3.html 文件到 GitHub Pages 的工作流
+name: 部署 player3.html 到 Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # 仅当推送到 master 分支时触发工作流
   push:
-    branches: ["main"]
+    branches: ["master"]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # 允许从 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: read     # 读取内容权限
+  pages: write       # 写入 GitHub Pages 的权限
+  id-token: write    # 写入 ID 令牌的权限
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# 只允许一次并发部署，跳过队列中进行中的运行和最新的排队任务
+# 但不要取消正在进行中的部署，确保生产部署能正常完成
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "pages"  # 并发组命名为“pages”
+  cancel-in-progress: false  # 不取消进行中的部署
 
 jobs:
-  # Single deploy job since we're just deploying
+  # 单个部署任务，因为我们只需要进行简单的部署
   deploy:
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      name: github-pages  # 部署环境名称
+      url: ${{ steps.deployment.outputs.page_url }}  # 部署完成后输出页面的 URL
+    runs-on: ubuntu-latest  # 在最新的 Ubuntu 服务器上运行
     steps:
-      - name: Checkout
+      # 第一步：检出仓库代码
+      - name: 检出代码
         uses: actions/checkout@v4
-      - name: Setup Pages
+      
+      # 第二步：设置 GitHub Pages 环境
+      - name: 设置 Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+      
+      # 第三步：上传工件（player3.html 文件）
+      - name: 上传工件
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
+          # 指定要上传的 HTML 文件路径
+          path: './player3.html'  # 指定根目录下的 player3.html 文件
+      
+      # 第四步：部署到 GitHub Pages
+      - name: 部署到 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
