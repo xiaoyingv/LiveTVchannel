@@ -1,3 +1,2 @@
-# LiveTVchannel
-LiveTVchannel
-[LiveTVchannelWeb](player3.html)
+# LiveTVchannelWeb
+[LiveTVchannelWeb](https://xiaoyingv.github.io/LiveTVchannel/player3.html)
