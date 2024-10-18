@@ -13,17 +13,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'  # 你可以选择其他版本的 Node.js
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build project (if needed)
-      run: npm run build  # 如果你的项目需要构建步骤，这里执行相应的命令
-
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
