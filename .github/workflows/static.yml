@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Specify the path to the HTML file (player3.html in the root directory)
-          path: './player3.html'
+          path: 'main/player3.html'
       
       # Step 4: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
