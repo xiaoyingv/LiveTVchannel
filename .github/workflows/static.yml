@@ -1,50 +1,50 @@
-# 部署 player3.html 文件到 GitHub Pages 的工作流
-name: 部署 player3.html 到 Pages
+# Simple workflow for deploying a specific HTML file to GitHub Pages
+name: Deploy player3.html to Pages
 
 on:
-  # 仅当推送到 master 分支时触发工作流
+  # Runs on pushes targeting the default branch (replace with 'main' or 'master' as needed)
   push:
-    branches: ["master"]
+    branches: ["main"]
 
-  # 允许从 GitHub Actions 页面手动触发此工作流
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read     # 读取内容权限
-  pages: write       # 写入 GitHub Pages 的权限
-  id-token: write    # 写入 ID 令牌的权限
+  contents: read
+  pages: write
+  id-token: write
 
-# 只允许一次并发部署，跳过队列中进行中的运行和最新的排队任务
-# 但不要取消正在进行中的部署，确保生产部署能正常完成
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"  # 并发组命名为“pages”
-  cancel-in-progress: false  # 不取消进行中的部署
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  # 单个部署任务，因为我们只需要进行简单的部署
+  # Single deploy job since we're just deploying
   deploy:
     environment:
-      name: github-pages  # 部署环境名称
-      url: ${{ steps.deployment.outputs.page_url }}  # 部署完成后输出页面的 URL
-    runs-on: ubuntu-latest  # 在最新的 Ubuntu 服务器上运行
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      # 第一步：检出仓库代码
-      - name: 检出代码
+      # Step 1: Checkout the repository code
+      - name: Checkout
         uses: actions/checkout@v4
       
-      # 第二步：设置 GitHub Pages 环境
-      - name: 设置 Pages
+      # Step 2: Setup GitHub Pages environment
+      - name: Setup Pages
         uses: actions/configure-pages@v5
       
-      # 第三步：上传工件（player3.html 文件）
-      - name: 上传工件
+      # Step 3: Upload the specific HTML file (player3.html)
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 指定要上传的 HTML 文件路径，使用通配符来确保可以处理文件
-          path: './player3.html'  # 指定文件路径
+          # Specify the path to the HTML file (player3.html in the root directory)
+          path: './player3.html'
       
-      # 第四步：部署到 GitHub Pages
-      - name: 部署到 GitHub Pages
+      # Step 4: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
